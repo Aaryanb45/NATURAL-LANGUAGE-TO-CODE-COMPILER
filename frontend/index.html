@@ -1,0 +1,601 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compiler UI</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        textarea { width: 40%; height: 100px; margin: 10px; }
+        button { padding: 10px; font-size: 16px; cursor: pointer; }
+        #output { border: 1px solid #ccc; padding: 10px; width: 40%; height: 100px; overflow: auto; margin: 10px auto; }
+    </style>
+</head>
+<body>
+    <h1>Natural Language to Code Compiler</h1>
+    
+    <textarea id="userInput" placeholder="Enter your instruction..."></textarea><br>
+    <button onclick="compileCode()">Compile</button>
+    <button onclick="uploadManual()">Upload Manual</button><br>
+    
+    <h2>Output:</h2>
+    <div id="output">Waiting for input...</div>
+
+    <script>
+        async function compileCode() {
+            const inputText = document.getElementById("userInput").value; // Correct ID
+            try {
+                const response = await fetch("http://localhost:3001/compile", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ input: inputText })
+                });
+        
+                if (!response.ok) {
+                    throw new Error("Server error");
+                }
+        
+                const data = await response.json();
+                document.getElementById("output").innerText = data.output || "Error processing request."; // Correct way to update div
+            } catch (error) {
+                document.getElementById("output").innerText = "Failed to connect to the server.";
+            }
+        }
+
+        function uploadManual() {
+            window.open("./assests/manual.pdf", "_blank"); // Open manual in a new tab
+        }
+        
+    </script>
+    
+</body>
+</html>  -->
+
+
+<!-- <!DOCTYPE html> -->
+<!-- <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compiler UI</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        textarea { width: 40%; height: 100px; margin: 10px; }
+        button { padding: 10px; font-size: 16px; cursor: pointer; margin: 5px; }
+        #output { border: 1px solid #ccc; padding: 10px; width: 40%; height: 100px; overflow: auto; margin: 10px auto; }
+    </style>
+</head>
+<body>
+    <h1>Natural Language to Code Compiler</h1>
+    
+    <textarea id="userInput" placeholder="Enter your instruction..."></textarea><br>
+    <button onclick="compileCode()">Compile</button>
+    <button onclick="viewManual()">Manual</button>
+
+    <h2>Output:</h2>
+    <div id="output">Waiting for input...</div>
+
+    <script>
+        async function compileCode() {
+            const inputText = document.getElementById("userInput").value;
+            try {
+                const response = await fetch("http://localhost:6000/compile", { // Make sure this matches your backend port
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ input: inputText })
+                });
+
+                if (!response.ok) {
+                    throw new Error("Server error");
+                }
+
+                const data = await response.json();
+                document.getElementById("output").innerText = data.output || "Error processing request.";
+            } catch (error) {
+                document.getElementById("output").innerText = "Failed to connect to the server.";
+            }
+        }
+
+        function viewManual() {
+            window.open("./frontend/assets/manual.pdf", "_blank"); // Open manual in a new tab
+        }
+    </script>
+</body>
+</html> -->
+
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natural Language to Code Compiler</title>
+    <style>
+        /* General Page Styling */
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            text-align: center; 
+            padding: 20px; 
+            background: linear-gradient(135deg, #1e1e1e, #333); 
+            color: white; 
+        }
+
+        /* Compiler Container */
+        .container {
+            width: 50%;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Input Area */
+        textarea {
+            width: 90%; 
+            height: 100px; 
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        /* Buttons Styling */
+        .btn {
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            transition: 0.3s ease-in-out;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .btn-primary {
+            background: #ff7b00;
+            box-shadow: 0 0 10px #ff7b00;
+        }
+
+        .btn-primary:hover {
+            background: #ff9a3c;
+            box-shadow: 0 0 20px #ff9a3c;
+        }
+
+        .btn-secondary {
+            background: #007bff;
+            box-shadow: 0 0 10px #007bff;
+        }
+
+        .btn-secondary:hover {
+            background: #339cff;
+            box-shadow: 0 0 20px #339cff;
+        }
+
+        /* Output Box */
+        #output {
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 90%;
+            height: 100px;
+            margin: 10px auto;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 5px;
+            font-size: 16px;
+            overflow: auto;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        /* Output Fade-In Effect */
+        .fade-in {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Natural Language to Code Compiler</h1>
+        
+        <textarea id="userInput" placeholder="Enter your instruction..."></textarea><br>
+        <button class="btn btn-primary" onclick="compileCode()">Compile</button>
+        <button class="btn btn-secondary" onclick="viewManual()">📜 Manual</button>
+
+        <h2>Output:</h2>
+        <div id="output">Waiting for input...</div>
+    </div>
+
+    <script>
+        async function compileCode() {
+            const inputText = document.getElementById("userInput").value;
+            const outputBox = document.getElementById("output");
+
+            try {
+                const response = await fetch("http://localhost:6000/compile", { 
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ input: inputText })
+                });
+
+                if (!response.ok) {
+                    throw new Error("Server error");
+                }
+
+                const data = await response.json();
+                outputBox.innerText = data.output || "Error processing request.";
+                outputBox.classList.add("fade-in"); // Apply fade-in animation
+            } catch (error) {
+                outputBox.innerText = "⚠️ Failed to connect to the server.";
+                outputBox.classList.add("fade-in");
+            }
+        }
+
+        function viewManual() {
+            window.open("assets/manual.pdf", "_blank"); // Open manual in a new tab
+        }
+    </script>
+</body>
+</html> -->
+
+<!-- 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natural Language to Code Compiler</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #1e1e1e, #333);
+            color: white;
+        }
+
+        /* Compiler Container */
+        .container {
+            width: 50%;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Input Area */
+        textarea {
+            width: 90%;
+            height: 150px;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            transition: 0.3s;
+        }
+
+        textarea:focus {
+            background: rgba(255, 255, 255, 0.3);
+            outline: none;
+        }
+
+        /* Buttons Styling */
+        .btn {
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            transition: 0.3s ease-in-out;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .btn-primary {
+            background: #ff7b00;
+            box-shadow: 0 0 10px #ff7b00;
+        }
+
+        .btn-primary:hover {
+            background: #ff9a3c;
+            box-shadow: 0 0 20px #ff9a3c;
+        }
+
+        .btn-secondary {
+            background: #007bff;
+            box-shadow: 0 0 10px #007bff;
+        }
+
+        .btn-secondary:hover {
+            background: #339cff;
+            box-shadow: 0 0 20px #339cff;
+        }
+
+        /* Output Box */
+        #output {
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 90%;
+            height: 250px;
+            margin: 10px auto;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 5px;
+            font-size: 16px;
+            overflow: auto;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        /* Output Fade-In Effect */
+        .fade-in {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1> Natural Language to Code Compiler</h1>
+        
+        <textarea id="userInput" placeholder="Enter your instruction..."></textarea><br>
+        <button class="btn btn-primary" onclick="compileCode()">Compile</button>
+        <button class="btn btn-secondary" onclick="uploadManual()">Manual</button>
+
+        <h2>Output:</h2>
+        <div id="output">Waiting for input...</div>
+    </div>
+
+    <script>
+        async function compileCode() {
+            const inputText = document.getElementById("userInput").value;
+            const outputBox = document.getElementById("output");
+
+            try {
+                const response = await fetch("http://localhost:3001/compile", { 
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ input: inputText })
+                });
+
+                if (!response.ok) {
+                    throw new Error("Server error");
+                }
+
+                const data = await response.json();
+                outputBox.innerText = data.output || "Error processing request.";
+                outputBox.classList.add("fade-in"); // Apply fade-in animation
+            } catch (error) {
+                outputBox.innerText = "⚠️ Failed to connect to the server.";
+                outputBox.classList.add("fade-in");
+            }
+        }
+
+        function uploadManual() {
+            window.open("./assests/manual.pdf", "_blank"); // Open manual in a new tab
+        }
+    </script>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natural Language to Code Compiler</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #1e1e1e, #2c2c2c);
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .header {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ff7b00;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+
+        .panel {
+            display: flex;
+            width: 90%;
+            height: 65vh;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+        }
+
+        .input-section, .output-section {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .input-section h2, .output-section h2 {
+            margin-bottom: 10px;
+            font-size: 22px;
+            color: #ff9a3c;
+        }
+
+        textarea {
+            width: 100%;
+            height: 80%;
+            padding: 12px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            resize: none;
+            transition: 0.3s;
+        }
+
+        textarea:focus {
+            background: rgba(255, 255, 255, 0.25);
+            outline: none;
+        }
+
+        #output {
+            width: 100%;
+            height: 80%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border-radius: 8px;
+            overflow: auto;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 14px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            transition: 0.3s;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .btn-primary {
+            background: #ff7b00;
+            box-shadow: 0 0 15px #ff7b00;
+        }
+
+        .btn-primary:hover {
+            background: #ff9a3c;
+            box-shadow: 0 0 25px #ff9a3c;
+        }
+
+        .btn-secondary {
+            background: #007bff;
+            box-shadow: 0 0 15px #007bff;
+        }
+
+        .btn-secondary:hover {
+            background: #339cff;
+            box-shadow: 0 0 25px #339cff;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">Natural Language to Code Compiler</div>
+    <div class="container">
+        <div class="panel">
+            <div class="input-section">
+                <h2>Input</h2>
+                <textarea id="userInput" placeholder="Enter your instruction..."></textarea>
+            </div>
+            <div class="buttons">
+                <button class="btn btn-primary" onclick="compileCode()">Compile</button>
+                <button class="btn btn-secondary" onclick="uploadManual()">Manual</button>
+            </div>
+            <div class="output-section">
+                <h2>Output</h2>
+                <div id="output">Waiting for input...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function compileCode() {
+            const inputText = document.getElementById("userInput").value;
+            const outputBox = document.getElementById("output");
+
+            try {
+                const response = await fetch("http://localhost:3001/compile", { 
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ input: inputText })
+                });
+
+                if (!response.ok) {
+                    throw new Error("Server error");
+                }
+
+                const data = await response.json();
+                outputBox.innerText = data.output || "Error processing request.";
+            } catch (error) {
+                outputBox.innerText = "⚠️ Failed to connect to the server.";
+            }
+        }
+
+        function uploadManual() {
+            window.open("./assests/updated_manual_pdf.pdf", "_blank");
+        }
+    </script>
+</body>
+</html>
