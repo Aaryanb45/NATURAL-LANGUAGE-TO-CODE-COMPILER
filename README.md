@@ -89,10 +89,18 @@ g++ -std=c++17 -o compiler main.cpp
 Run
 ./compiler
 
+
+
+
 HERE ARE SOME SCREENSHOTS OF THE COMPILER HOW IT LOOKS
-# NATURAL-LANGUAGE-TO-CODE-COMPILER<img width="1470" alt="Screenshot 2025-04-11 at 1 59 26 AM" src="https://github.com/user-attachments/assets/77df2267-afd7-48e2-acb3-f64e44777941" />
-<img width="1410" alt="Screenshot 2025-04-11 at 2 00 42 AM" src="https://github.com/user-attachments/assets/277467dd-7d19-4d36-8233-d91060190ccf" />
-<img width="1372" alt="Screenshot 2025-04-11 at 2 01 49 AM" src="https://github.com/user-attachments/assets/a2ce0536-ffc5-44a7-baa9-5f4f47be2398" />
+
+<img width="1379" alt="Screenshot 2025-04-11 at 2 07 57 AM" src="https://github.com/user-attachments/assets/18c0b3e1-a3e8-4f5e-b4e7-f80b5e610a0b" />
+
+<img width="1388" alt="Screenshot 2025-04-11 at 2 07 29 AM" src="https://github.com/user-attachments/assets/da8f5af4-d2c7-454c-acd4-14f22c00c65c" />
+
+
+
+
 
 
 Support
