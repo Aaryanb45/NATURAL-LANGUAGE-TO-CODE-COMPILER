@@ -1,4 +1,4 @@
-# 🧠 Natural Language to C++ Code Compiler
+# Natural Language to C++ Code Compiler
 
 ## Overview
 
@@ -8,17 +8,17 @@ This compiler aims to make C++ coding simpler for beginners, educators, and deve
 
 ---
 
-## ✨ Features
+## Features
 
-- ✅ **Intent Detection**: Understands if the user wants to create a loop, declare a variable, define a function, etc.
-- 🛠️ **Code Generation**: Generates accurate, readable, and formatted C++ code.
-- 🧠 **Syntax Correction**: Detects and auto-fixes basic syntactic issues before compilation.
-- 🔁 **Reverse Mode**: Converts C++ code back into pseudocode for easy learning.
-- 📄 **Documentation Generator**: Automatically creates inline documentation.
-- 📈 **Performance Analyzer**: Suggests improvements and flags inefficient code.
-- ⚠️ **Error Logger**: Logs and reports all issues and corrections.
-- 💬 **Examples & Help**: Offers real-time help, examples, and manual support.
-- 🌍 **Language-Ready**: Designed for future support of additional programming languages.
+Intent Detection**: Understands if the user wants to create a loop, declare a variable, define a function, etc.
+Code Generation**: Generates accurate, readable, and formatted C++ code.
+Syntax Correction**: Detects and auto-fixes basic syntactic issues before compilation.
+Reverse Mode**: Converts C++ code back into pseudocode for easy learning.
+Documentation Generator**: Automatically creates inline documentation.
+Performance Analyzer**: Suggests improvements and flags inefficient code.
+Error Logger**: Logs and reports all issues and corrections.
+Examples & Help**: Offers real-time help, examples, and manual support.
+Language-Ready**: Designed for future support of additional programming languages.
 
 ---
 
@@ -42,7 +42,9 @@ Open your terminal or command prompt and run:
 
 ```bash
 git clone https://github.com/AkshatPandey-2004/NL-to-CPP-Compiler.git
-Step 2: Navigate to the Project Directory
+
+
+### Step 2: Navigate to the Project Directory
 cd NL-to-CPP-Compiler
 Step 3: Open the Project in Your Editor
 code .
